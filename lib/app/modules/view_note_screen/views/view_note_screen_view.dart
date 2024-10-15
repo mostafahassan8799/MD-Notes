@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:notes/widgets/custom_bottom_sheet.dart';
+import 'package:notes/widgets/notes_view_body.dart';
 
 import '../controllers/view_note_screen_controller.dart';
 
@@ -9,15 +11,23 @@ class ViewNoteScreenView extends GetView<ViewNoteScreenController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('ViewNoteScreenView'),
-        centerTitle: true,
+      resizeToAvoidBottomInset: false,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showModalBottomSheet(
+              isScrollControlled: true,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+              context: context,
+              builder: (context) {
+                return const CustomBottomSheet();
+              });
+        },
+        child: const Icon(Icons.add),
       ),
-      body: const Center(
-        child: Text(
-          'ViewNoteScreenView is working',
-          style: TextStyle(fontSize: 20),
-        ),
+      body: NotesViewBody(
+        controller: controller,
       ),
     );
   }
