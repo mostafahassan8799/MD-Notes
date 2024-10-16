@@ -21,13 +21,17 @@ class ViewNoteScreenView extends GetView<ViewNoteScreenController> {
               ),
               context: context,
               builder: (context) {
-                return const CustomBottomSheet();
+                return CustomBottomSheet(
+                  controller: controller,
+                );
               });
         },
         child: const Icon(Icons.add),
       ),
-      body: NotesViewBody(
-        controller: controller,
+      body: Obx(
+        () => NotesViewBody(
+          controller: controller,
+        ),
       ),
     );
   }

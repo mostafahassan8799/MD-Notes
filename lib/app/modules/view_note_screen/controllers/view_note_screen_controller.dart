@@ -5,17 +5,29 @@ import 'package:notes/constants/string_cont.dart';
 import 'package:notes/models/note_model.dart';
 
 class ViewNoteScreenController extends GetxController {
-  Color color = const Color(0xFFFFD700);
+  final color = 0.obs;
+
   final notes = [].obs;
   final isLoading = false.obs;
+  var noteBox = Hive.box<NoteModel>(kNotesBox);
 
   addNote(NoteModel noteModel) async {
-    noteModel.color = color.value;
     try {
-      var noteBox = Hive.box<NoteModel>(kNotesBox);
       await noteBox.add(noteModel);
     } catch (e) {
       throw e.toString();
     }
+  }
+
+  fetchAllNotes() async {
+    notes.assignAll(noteBox.values.toList());
+  }
+
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    color.value = const Color(0xFFFFD700).value;
+    fetchAllNotes();
   }
 }

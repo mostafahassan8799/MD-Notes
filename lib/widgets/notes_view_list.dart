@@ -17,6 +17,7 @@ class NotesViewList extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 4),
             child: NoteItem(
               notes: controller.notes[index],
+              controller: controller,
             ),
           );
         });

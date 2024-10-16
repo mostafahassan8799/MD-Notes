@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:notes/app/modules/view_note_screen/controllers/view_note_screen_controller.dart';
 import 'package:notes/constants/string_cont.dart';
 
 class ColorItem extends StatelessWidget {
@@ -33,6 +35,8 @@ class ColorsListView extends StatefulWidget {
 
 class _ColorsListViewState extends State<ColorsListView> {
   int currentIndex = 0;
+  final ViewNoteScreenController controller =
+      Get.find<ViewNoteScreenController>();
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +51,8 @@ class _ColorsListViewState extends State<ColorsListView> {
             child: GestureDetector(
               onTap: () {
                 currentIndex = index;
-                // BlocProvider.of<AddNoteCubit>(context).color = kColors[index];
+                controller.color.value = kColors[index].value;
+
                 setState(() {});
               },
               child: ColorItem(

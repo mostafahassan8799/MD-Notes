@@ -58,11 +58,13 @@ class _AddNoteFormState extends State<AddNoteForm> {
                       title: title!,
                       subTitle: subTitle!,
                       date: formattedCurrentDate,
-                      color: Colors.blue.value,
+                      color: noteController.color.value,
                       isChecked: false,
                     );
 
-                    noteController.addNote(noteModel); // Use GetX addNote
+                    noteController.addNote(noteModel);
+                    noteController.notes.add(noteModel);
+                    Get.back(); // Use GetX addNote
                   } else {
                     setState(() {
                       autovalidateMode = AutovalidateMode.always;

@@ -4,13 +4,11 @@ import 'package:notes/app/modules/view_note_screen/controllers/view_note_screen_
 import 'package:notes/widgets/add_note_form.dart';
 
 class CustomBottomSheet extends StatelessWidget {
-  const CustomBottomSheet({super.key});
+  const CustomBottomSheet({super.key, required this.controller});
+  final ViewNoteScreenController controller;
 
   @override
   Widget build(BuildContext context) {
-    final ViewNoteScreenController addNoteController =
-        Get.put(ViewNoteScreenController());
-
     return Padding(
       padding: EdgeInsets.only(
         left: 16,
@@ -19,7 +17,7 @@ class CustomBottomSheet extends StatelessWidget {
       ),
       child: Obx(() {
         return AbsorbPointer(
-          absorbing: addNoteController.isLoading.value,
+          absorbing: controller.isLoading.value,
           child: const SingleChildScrollView(
             child: AddNoteForm(),
           ),
